@@ -1,0 +1,9 @@
+server.port: 9090
+zuul:
+  routes:
+    documents:
+      path: /documents/**
+      url: http://localhost:8080/documents
+    search:
+      path: /search/**
+      url: http://localhost:8080/search  
