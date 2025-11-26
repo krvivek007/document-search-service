@@ -1,0 +1,87 @@
+{
+  "type": "record",
+  "name": "DocumentIndexEvent",
+  "namespace": "document.search.avro.model",
+  "doc": "Document Index event",
+  "fields": [
+    {
+      "name": "header",
+      "type": [
+        "null",
+        {
+          "type": "record",
+          "name": "DocumentEventEventHeader",
+          "doc": "Default information",
+          "fields": [
+            {
+              "name": "id",
+              "type": {
+                "type": "string",
+                "avro.java.string": "String"
+              },
+              "doc": "GUID (UUID) of the event making it globally identifiable"
+            },
+            {
+              "name": "sourceSystem",
+              "type": {
+                "type": "string",
+                "avro.java.string": "String"
+              },
+              "doc": "Source system which created the event"
+            },
+            {
+              "name": "createdAt",
+              "type": "long",
+              "doc": "Event timestamp creation in epoch format"
+            }
+          ]
+        }
+      ],
+      "default": null
+    },
+    {
+      "name": "body",
+      "type": {
+        "type": "record",
+        "name": "DocumentEventEventBody",
+        "doc": "Body information of the event",
+        "fields": [
+          {
+            "name": "documentId",
+            "type": {
+              "type": "string",
+              "avro.java.string": "String"
+            },
+            "doc": "UUID of the transaction"
+          },
+          {
+            "name": "tenentId",
+            "type": {
+              "type": "string",
+              "avro.java.string": "String"
+            },
+            "doc": "Tenant ID that initiated the transaction"
+          },
+          {
+            "name": "transactionType",
+            "type": {
+              "type": "enum",
+              "name": "TransactionType",
+              "symbols": [
+                "INDEX",
+                "DELETE"
+              ]
+            },
+            "doc": "Transaction type. Future values might be added"
+          },
+          {
+            "name": "date",
+            "type": "long",
+            "doc": "The timestamp when the transaction event was generated"
+          }
+        ]
+      },
+      "doc": "body of transaction event"
+    }
+  ]
+}
